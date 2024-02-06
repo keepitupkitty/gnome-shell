@@ -760,7 +760,10 @@ export const LoginDialog = GObject.registerClass({
         let authPromptAllocation = null;
         let authPromptWidth = 0;
         if (this._authPrompt.visible) {
-            authPromptAllocation = this._getFixedTopActorAllocation(dialogBox, this._authPrompt);
+            if (this._authPrompt.webLoginActive)
+                authPromptAllocation = this._getCenterActorAllocation(dialogBox, this._authPrompt);
+            else
+                authPromptAllocation = this._getFixedTopActorAllocation(dialogBox, this._authPrompt);
             authPromptWidth = authPromptAllocation.x2 - authPromptAllocation.x1;
         }
 

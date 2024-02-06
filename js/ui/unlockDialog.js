@@ -496,7 +496,8 @@ class UnlockDialogLayout extends Clutter.LayoutManager {
         // Authentication Box
         const dialog = container.get_parent();
         let stackY;
-        if (dialog._activePage === dialog._clock) {
+        if (dialog._activePage === dialog._clock ||
+            dialog._authPrompt?.webLoginActive) {
             stackY = Math.min(
                 Math.floor(centerY - stackHeight / 2.0),
                 height - stackHeight - maxNotificationsHeight);
