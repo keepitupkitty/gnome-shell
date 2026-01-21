@@ -242,6 +242,10 @@ export const AuthPrompt = GObject.registerClass({
             this.cancel();
             return Clutter.EVENT_STOP;
         }
+
+        if (this._preemptiveInput && !this._pendingActivate)
+            return this._entry.clutter_text.event(event, false);
+
         return Clutter.EVENT_PROPAGATE;
     }
 
@@ -339,7 +343,16 @@ export const AuthPrompt = GObject.registerClass({
                     this._fadeOutMessage();
             });
 
-            entry.clutter_text.connect('activate', () => this._activateNext());
+            entry.clutter_text.connect('activate', () => {
+                if (this._preemptiveInput &&
+                    !this._pendingActivate &&
+                    this._entry.clutter_text.text) {
+                    this._pendingActivate = true;
+                    return;
+                }
+
+                this._activateNext();
+            });
         });
 
         this._defaultButtonWell = new St.Widget({
@@ -673,8 +686,22 @@ export const AuthPrompt = GObject.registerClass({
             opacity: 255,
             duration: MESSAGE_FADE_OUT_ANIMATION_TIME,
             transition: Clutter.AnimationMode.EASE_OUT_QUAD,
-            onComplete: () => this.updateSensitivity({sensitive: true}),
+            onComplete: () => {
+                this.updateSensitivity({sensitive: true});
+                this._completePreemptiveInput({canActivate: element === this._entryArea});
+            },
+            onStopped: (isFinished) => {
+                if (!isFinished)
+                    this._completePreemptiveInput();
+            },
         });
+    }
+
+    _completePreemptiveInput({canActivate = false} = {}) {
+        if (this._pendingActivate && canActivate)
+            this._activateNext();
+        this._preemptiveInput = false;
+        this._pendingActivate = false;
     }
 
     setChoiceList(promptMessage, choiceList) {
@@ -786,7 +813,7 @@ export const AuthPrompt = GObject.registerClass({
     }
 
     reset(params) {
-        const {reuseEntryText, softReset} = Params.parse(params, {
+        let {reuseEntryText, softReset} = Params.parse(params, {
             reuseEntryText: false,
             softReset: false,
         });
@@ -800,6 +827,8 @@ export const AuthPrompt = GObject.registerClass({
 
         if (this._userVerifier)
             this._userVerifier.cancel();
+
+        reuseEntryText = reuseEntryText || this._preemptiveInput;
 
         this._queryingService = null;
         this.clear({reuseEntryText});
@@ -837,12 +866,10 @@ export const AuthPrompt = GObject.registerClass({
         this.emit('reset', resetType);
     }
 
-    addCharacter(unichar) {
-        if (!this._entry.visible)
-            return;
-
-        this._entry.grab_key_focus();
+    startPreemptiveInput(unichar) {
+        this._preemptiveInput = true;
         this._entry.clutter_text.insert_unichar(unichar);
+        this.grab_key_focus();
     }
 
     /*
