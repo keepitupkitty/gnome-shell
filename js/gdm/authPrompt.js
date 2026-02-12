@@ -522,6 +522,15 @@ export const AuthPrompt = GObject.registerClass({
         }
 
         this.setMessage(message, type, wiggleParameters);
+
+        // If we're showing a message and no auth widget is currently visible,
+        // show the entry area to allow getting a preemptive answer
+        if (message &&
+            type < GdmUtil.MessageType.ERROR &&
+            !this._entryArea.visible &&
+            !this._authList.visible)
+            this._fadeInElement(this._entryArea);
+
         this.emit('prompted');
     }
 
