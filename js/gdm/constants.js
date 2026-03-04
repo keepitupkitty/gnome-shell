@@ -10,3 +10,6 @@ export const PASSWORD_SERVICE_NAME = 'gdm-password';
 export const SMARTCARD_SERVICE_NAME = 'gdm-smartcard';
 export const FINGERPRINT_SERVICE_NAME = 'gdm-fingerprint';
 export const SWITCHABLE_AUTH_SERVICE_NAME = 'gdm-switchable-auth';
+export const SWITCHABLE_AUTH_TEST_SERVICE_NAME = 'gdm-switchable-auth-test';
+
+export const SWITCHABLE_AUTH_TEST_ENV = 'GDM_SWITCHABLE_AUTH_TEST';

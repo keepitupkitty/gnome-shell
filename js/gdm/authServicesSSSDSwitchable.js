@@ -12,6 +12,12 @@ const MechanismsStatus = {
     FOUND: 2,
 };
 
+function _getServiceName() {
+    if (GLib.getenv(Constants.SWITCHABLE_AUTH_TEST_ENV) !== null)
+        return Constants.SWITCHABLE_AUTH_TEST_SERVICE_NAME;
+    return Constants.SWITCHABLE_AUTH_SERVICE_NAME;
+}
+
 export class AuthServicesSSSDSwitchable extends AuthServices {
     static SupportedRoles = [
         Constants.PASSWORD_ROLE_NAME,
@@ -21,10 +27,10 @@ export class AuthServicesSSSDSwitchable extends AuthServices {
     ];
 
     static RoleToService = {
-        [Constants.PASSWORD_ROLE_NAME]: Constants.SWITCHABLE_AUTH_SERVICE_NAME,
-        [Constants.SMARTCARD_ROLE_NAME]: Constants.SWITCHABLE_AUTH_SERVICE_NAME,
-        [Constants.PASSKEY_ROLE_NAME]: Constants.SWITCHABLE_AUTH_SERVICE_NAME,
-        [Constants.WEB_LOGIN_ROLE_NAME]: Constants.SWITCHABLE_AUTH_SERVICE_NAME,
+        [Constants.PASSWORD_ROLE_NAME]: _getServiceName(),
+        [Constants.SMARTCARD_ROLE_NAME]: _getServiceName(),
+        [Constants.PASSKEY_ROLE_NAME]: _getServiceName(),
+        [Constants.WEB_LOGIN_ROLE_NAME]: _getServiceName(),
     };
 
     static {
@@ -163,7 +169,7 @@ export class AuthServicesSSSDSwitchable extends AuthServices {
     _handleUpdateEnabledMechanisms() {
         this._enabledMechanisms.push(...Object.keys(this._mechanisms)
             .map(id => ({
-                serviceName: Constants.SWITCHABLE_AUTH_SERVICE_NAME,
+                serviceName: _getServiceName(),
                 id,
                 ...this._mechanisms[id],
             }))
@@ -277,7 +283,7 @@ export class AuthServicesSSSDSwitchable extends AuthServices {
     }
 
     _handleCanStartService(serviceName) {
-        return serviceName === Constants.SWITCHABLE_AUTH_SERVICE_NAME &&
+        return serviceName === _getServiceName() &&
             this._mechanismsStatus === MechanismsStatus.WAITING;
     }
 
