@@ -14,7 +14,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the 
+ * You should have received a copy of the
  * GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
@@ -56,16 +56,6 @@ struct _CROMParser
 
 CROMParser * cr_om_parser_new (CRInput *a_input) ;
 
-
-enum CRStatus cr_om_parser_simply_parse_file (const guchar *a_file_path,
-                                              enum CREncoding a_enc,
-                                              CRStyleSheet **a_result) ;
-
-enum CRStatus cr_om_parser_parse_file (CROMParser *a_this,
-                                       const guchar *a_file_uri,
-                                       enum CREncoding a_enc,
-                                       CRStyleSheet **a_result) ;
-
 enum CRStatus cr_om_parser_simply_parse_buf (const guchar *a_buf,
                                              gulong a_len,
                                              enum CREncoding a_enc,
@@ -76,19 +66,6 @@ enum CRStatus cr_om_parser_parse_buf (CROMParser *a_this,
                                       gulong a_len,
                                       enum CREncoding a_enc,
                                       CRStyleSheet **a_result) ;
-
-enum CRStatus cr_om_parser_parse_paths_to_cascade (CROMParser *a_this,
-                                                   const guchar *a_author_path,
-                                                   const guchar *a_user_path,
-                                                   const guchar *a_ua_path,
-                                                   enum CREncoding a_encoding,
-                                                   CRCascade ** a_result) ;
-
-enum CRStatus cr_om_parser_simply_parse_paths_to_cascade (const guchar *a_author_path,
-                                                          const guchar *a_user_path,
-                                                          const guchar *a_ua_path,
-                                                          enum CREncoding a_encoding,
-                                                          CRCascade ** a_result) ;
 
 void cr_om_parser_destroy (CROMParser *a_this) ;
 

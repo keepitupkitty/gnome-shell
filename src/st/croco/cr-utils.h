@@ -80,7 +80,7 @@ enum CRSeekPos {
 /**
  *Encoding values.
  */
-enum CREncoding 
+enum CREncoding
 {
         CR_UCS_4 = 1/*Must be not NULL*/,
         CR_UCS_1,
@@ -119,7 +119,7 @@ g_log (CROCO_LOG_DOMAIN, \
 /**
  *Traces an info message.
  *The file, line and enclosing function
- *of the message will be automatically 
+ *of the message will be automatically
  *added to the message.
  *@param a_msg the msg to trace.
  */
@@ -155,61 +155,17 @@ cr_utils_utf8_to_ucs1 (const guchar * a_in, gulong * a_in_len,
                        guchar *a_out, gulong *a_out_len) ;
 
 enum CRStatus
-cr_utils_ucs4_to_utf8 (const guint32 *a_in, gulong *a_in_len,
-                       guchar *a_out, gulong *a_out_len) ;
-
-enum CRStatus
-cr_utils_utf8_str_len_as_ucs4 (const guchar *a_in_start,
-                               const guchar *a_in_end,
-                               gulong *a_len) ;
-enum CRStatus
-cr_utils_ucs1_str_len_as_utf8 (const guchar *a_in_start, 
+cr_utils_ucs1_str_len_as_utf8 (const guchar *a_in_start,
                                const guchar *a_in_end,
                                gulong *a_len) ;
 enum CRStatus
 cr_utils_utf8_str_len_as_ucs1 (const guchar *a_in_start,
                                const guchar *a_in_end,
                                gulong *a_len) ;
-enum CRStatus
-cr_utils_ucs4_str_len_as_utf8 (const guint32 *a_in_start, 
-                               const guint32 *a_in_end,
-                               gulong *a_len) ;
-
-enum CRStatus
-cr_utils_ucs1_str_to_utf8 (const guchar *a_in_start, 
-                           gulong *a_in_len,
-                           guchar **a_out, 
-                           gulong *a_len) ;
-
-enum CRStatus
-cr_utils_utf8_str_to_ucs1 (const guchar * a_in_start, 
-                           gulong * a_in_len,
-                           guchar **a_out, 
-                           gulong *a_out_len) ;
-
-enum CRStatus
-cr_utils_utf8_to_ucs4 (const guchar * a_in, 
-                       gulong * a_in_len,
-                       guint32 *a_out, gulong *a_out_len) ;
-
-enum CRStatus
-cr_utils_ucs4_str_to_utf8 (const guint32 *a_in, 
-                           gulong *a_in_len,
-                           guchar **a_out, gulong *a_out_len) ;
-
-enum CRStatus
-cr_utils_utf8_str_to_ucs4 (const guchar * a_in, 
-                           gulong *a_in_len,
-                           guint32 **a_out, 
-                           gulong *a_out_len) ;
-
 
 /*****************************************
  *CSS basic types identification utilities
  *****************************************/
-
-gboolean
-cr_utils_is_newline (guint32 a_char) ;
 
 gboolean
 cr_utils_is_white_space (guint32 a_char) ;
@@ -217,25 +173,14 @@ cr_utils_is_white_space (guint32 a_char) ;
 gboolean
 cr_utils_is_nonascii (guint32 a_char) ;
 
-gboolean
-cr_utils_is_hexa_char (guint32 a_char) ;
-
-
 /**********************************
  *Miscellaneous utility functions
  ***********************************/
 
 void
-cr_utils_dump_n_chars (guchar a_char, 
-                       FILE *a_fp, 
-                       glong a_nb) ;
-
-void
-cr_utils_dump_n_chars2 (guchar a_char, 
+cr_utils_dump_n_chars2 (guchar a_char,
                         GString *a_string,
                         glong a_nb) ;
-GList *
-cr_utils_dup_glist_of_string (GList const *a_list) ;
 
 GList *
 cr_utils_dup_glist_of_cr_string (GList const * a_list_of_strings) ;

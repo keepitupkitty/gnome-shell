@@ -39,27 +39,6 @@ struct CREncAlias {
         enum CREncoding encoding;
 };
 
-static struct CREncAlias gv_default_aliases[] = {
-        {"UTF-8", CR_UTF_8},
-        {"UTF_8", CR_UTF_8},
-        {"UTF8", CR_UTF_8},
-        {"UTF-16", CR_UTF_16},
-        {"UTF_16", CR_UTF_16},
-        {"UTF16", CR_UTF_16},
-        {"UCS1", CR_UCS_1},
-        {"UCS-1", CR_UCS_1},
-        {"UCS_1", CR_UCS_1},
-        {"ISO-8859-1", CR_UCS_1},
-        {"ISO_8859-1", CR_UCS_1},
-        {"UCS-1", CR_UCS_1},
-        {"UCS_1", CR_UCS_1},
-        {"UCS4", CR_UCS_4},
-        {"UCS-4", CR_UCS_4},
-        {"UCS_4", CR_UCS_4},
-        {"ASCII", CR_ASCII},
-        {0, 0}
-};
-
 static CREncHandler gv_default_enc_handlers[] = {
         {CR_UCS_1, cr_utils_ucs1_to_utf8, cr_utils_utf8_to_ucs1,
          cr_utils_ucs1_str_len_as_utf8, cr_utils_utf8_str_len_as_ucs1},
@@ -94,40 +73,6 @@ cr_enc_handler_get_instance (enum CREncoding a_enc)
         }
 
         return NULL;
-}
-
-/**
- * cr_enc_handler_resolve_enc_alias:
- *@a_alias_name: the encoding name.
- *@a_enc: output param. The returned encoding type
- *or 0 if the alias is not supported.
- *
- *Given an encoding name (called an alias name)
- *the function returns the matching encoding type.
- *
- *Returns CR_OK upon successful completion, an error code otherwise.
- */
-enum CRStatus
-cr_enc_handler_resolve_enc_alias (const guchar * a_alias_name,
-                                  enum CREncoding *a_enc)
-{
-        gulong i = 0;
-        guchar *alias_name_up = NULL;
-        enum CRStatus status = CR_ENCODING_NOT_FOUND_ERROR;
-
-        g_return_val_if_fail (a_alias_name != NULL, CR_BAD_PARAM_ERROR);
-
-        alias_name_up = (guchar *) g_ascii_strup ((const gchar *) a_alias_name, -1);
-
-        for (i = 0; gv_default_aliases[i].name; i++) {
-                if (!strcmp (gv_default_aliases[i].name, (const gchar *) alias_name_up)) {
-                        *a_enc = gv_default_aliases[i].encoding;
-                        status = CR_OK;
-                        break;
-                }
-        }
-
-        return status;
 }
 
 /**

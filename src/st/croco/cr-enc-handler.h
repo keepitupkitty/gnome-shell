@@ -49,7 +49,7 @@ typedef enum CRStatus (*CREncOutputFunc) (const guchar * a_in,
                                           guchar *a_out,
                                           gulong *a_out_len) ;
 
-typedef enum CRStatus (*CREncInputStrLenAsUtf8Func) 
+typedef enum CRStatus (*CREncInputStrLenAsUtf8Func)
 (const guchar *a_in_start,
  const guchar *a_in_end,
  gulong *a_in_size);
@@ -68,7 +68,7 @@ typedef enum CRStatus  (*CREncUtf8StrLenAsOutputFunc)
 struct _CREncHandler
 {
         enum CREncoding encoding ;
-        CREncInputFunc decode_input ;                
+        CREncInputFunc decode_input ;
         CREncInputFunc encode_output ;
         CREncInputStrLenAsUtf8Func enc_str_len_as_utf8 ;
         CREncUtf8StrLenAsOutputFunc utf8_str_len_as_enc ;
@@ -76,10 +76,6 @@ struct _CREncHandler
 
 CREncHandler *
 cr_enc_handler_get_instance (enum CREncoding a_enc) ;
-
-enum CRStatus
-cr_enc_handler_resolve_enc_alias (const guchar *a_alias_name, 
-                                  enum CREncoding *a_enc) ;
 
 enum CRStatus
 cr_enc_handler_convert_input (CREncHandler *a_this,

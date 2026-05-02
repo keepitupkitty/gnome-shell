@@ -47,7 +47,7 @@ G_BEGIN_DECLS
  *of numbers.
  *Please, do not modify
  *the declaration order of the enum
- *members, unless you know 
+ *members, unless you know
  *what you are doing.
  */
 enum CRNumType
@@ -95,26 +95,13 @@ struct _CRNum
 
 CRNum *
 cr_num_new (void) ;
-	
+
 CRNum *
 cr_num_new_with_val (gdouble a_val,
                      enum CRNumType a_type) ;
 
-CRNum *
-cr_num_dup (CRNum const *a_this) ;
-
 guchar *
 cr_num_to_string (CRNum const *a_this) ;
-
-enum CRStatus
-cr_num_copy (CRNum *a_dest, CRNum const *a_src) ;
-
-enum CRStatus
-cr_num_set (CRNum *a_this, gdouble a_val, 
-            enum CRNumType a_type) ;
-
-gboolean
-cr_num_is_fixed_length (CRNum const *a_this) ;
 
 void
 cr_num_destroy (CRNum *a_this) ;
