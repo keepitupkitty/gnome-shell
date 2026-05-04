@@ -89,8 +89,7 @@ cr_declaration_new (CRStatement * a_statement,
  *Returns the parsed list of declaration, NULL if parsing failed.
  */
 CRDeclaration *
-cr_declaration_parse_list_from_buf (const guchar * a_str,
-                                    enum CREncoding a_enc)
+cr_declaration_parse_list_from_buf (const guchar * a_str)
 {
 
         enum CRStatus status = CR_OK;
@@ -104,7 +103,7 @@ cr_declaration_parse_list_from_buf (const guchar * a_str,
 
         g_return_val_if_fail (a_str, NULL);
 
-        parser = cr_parser_new_from_buf ((guchar*)a_str, strlen ((const char *) a_str), a_enc, FALSE);
+        parser = cr_parser_new_from_buf ((guchar*)a_str, strlen ((const char *) a_str), FALSE);
         g_return_val_if_fail (parser, NULL);
         status = cr_parser_get_tknzr (parser, &tokenizer);
         if (status != CR_OK || !tokenizer) {

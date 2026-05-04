@@ -46,7 +46,6 @@ enum CRStatus {
         CR_START_OF_INPUT_ERROR,
         CR_END_OF_INPUT_ERROR,
         CR_OUT_OF_BOUNDS_ERROR,
-        CR_ENCODING_ERROR,
         CR_PARSING_ERROR,
         CR_SYNTAX_ERROR,
         CR_OUT_OF_MEMORY_ERROR,
@@ -62,23 +61,6 @@ enum CRSeekPos {
         CR_SEEK_BEGIN,
         CR_SEEK_END
 } ;
-
-/**
- *Encoding values.
- */
-enum CREncoding
-{
-        CR_UCS_4 = 1/*Must be not NULL*/,
-        CR_UCS_1,
-        CR_ISO_8859_1,
-        CR_ASCII,
-        CR_UTF_8,
-        CR_UTF_16,
-        CR_AUTO/*should be the last one*/
-} ;
-
-
-
 
 #define CROCO_LOG_DOMAIN "LIBCROCO"
 
@@ -131,23 +113,6 @@ cr_utils_trace (G_LOG_LEVEL_DEBUG, a_msg) ;
 enum CRStatus
 cr_utils_read_char_from_utf8_buf (const guchar * a_in, gulong a_in_len,
                                   guint32 *a_out, gulong *a_consumed) ;
-
-enum CRStatus
-cr_utils_ucs1_to_utf8 (const guchar *a_in, gulong *a_in_len,
-                       guchar *a_out, gulong *a_out_len) ;
-
-enum CRStatus
-cr_utils_utf8_to_ucs1 (const guchar * a_in, gulong * a_in_len,
-                       guchar *a_out, gulong *a_out_len) ;
-
-enum CRStatus
-cr_utils_ucs1_str_len_as_utf8 (const guchar *a_in_start,
-                               const guchar *a_in_end,
-                               gulong *a_len) ;
-enum CRStatus
-cr_utils_utf8_str_len_as_ucs1 (const guchar *a_in_start,
-                               const guchar *a_in_end,
-                               gulong *a_len) ;
 
 /*****************************************
  *CSS basic types identification utilities

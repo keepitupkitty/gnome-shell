@@ -55,7 +55,6 @@ struct _CRParser  {
 CRParser * cr_parser_new (CRTknzr *a_tknzr) ;
 
 CRParser * cr_parser_new_from_buf (guchar *a_buf, gulong a_len,
-                        enum CREncoding a_enc,
                         gboolean a_free_buf) ;
 
 CRParser * cr_parser_new_from_input (CRInput *a_input) ;
@@ -80,7 +79,7 @@ enum CRStatus cr_parser_get_sac_handler (CRParser *a_this,
 enum CRStatus cr_parser_parse (CRParser *a_this) ;
 
 enum CRStatus cr_parser_parse_buf (CRParser *a_this, const guchar *a_buf,
-                                   gulong a_len, enum CREncoding a_enc) ;
+                                   gulong a_len) ;
 
 enum CRStatus cr_parser_parse_term (CRParser *a_this, CRTerm **a_term) ;
 
