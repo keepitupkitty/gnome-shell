@@ -219,15 +219,6 @@ struct _CRStatement
          *this pointer.
          */
         gpointer app_data ;
-
-        /**
-         *a custom pointer used
-         *by the upper layers of libcroco.
-         *application should never use this
-         *pointer.
-         */
-        gpointer croco_data ;
-
 } ;
 
 

@@ -128,7 +128,6 @@ struct _CRParserPriv {
 
         enum CRParserState state;
         gboolean resolve_import;
-        gboolean is_case_sensitive;
         gboolean use_core_grammar;
 };
 
