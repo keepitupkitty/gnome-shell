@@ -58,8 +58,6 @@ export class WeatherClient extends Signals.EventEmitter {
         this._permStore.connectSignal('Changed',
             this._onPermStoreChanged.bind(this));
 
-        this._locationSettings = new Gio.Settings({schema_id: 'org.gnome.system.location'});
-
         this._world = GWeather.Location.get_world();
 
         const providers =
@@ -210,7 +208,7 @@ export class WeatherClient extends Signals.EventEmitter {
     _onPermStoreChanged(proxy, sender, params) {
         const [table, id, deleted_, data_, perms] = params;
 
-        if (table !== 'gnome')
+        if (table !== 'gnome' || id !== 'org.gnome.Weather')
             return;
 
         const permission = perms['org.gnome.Weather'] || ['NONE'];
