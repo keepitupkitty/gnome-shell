@@ -149,7 +149,6 @@
     <file>ui/status/doNotDisturb.js</file>
     <file>ui/status/dwellClick.js</file>
     <file>ui/status/keyboard.js</file>
-    <file>ui/status/location.js</file>
     <file>ui/status/network.js</file>
     <file>ui/status/nightLight.js</file>
     <file>ui/status/powerProfiles.js</file>
